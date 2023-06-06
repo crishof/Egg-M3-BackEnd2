@@ -18,9 +18,36 @@ public class CiudadServicio {
         codigos.put(445302, "Helsinki");
         codigos.put(592857, "Rio");
         codigos.put(2829340, "Marsella");
-        codigos.put(945435, "Tokio");
-        codigos.put(23495, "Tokio");
+        codigos.put(945435, "Nairobi");
+        codigos.put(23495, "Estocolmo");
 
+        return codigos;
+    }
+
+    public HashMap<Integer, String> cargarCodigosManual(){
+
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        HashMap<Integer,String> codigos = new HashMap<>();
+        String nombre;
+        int cp;
+        String check = "S";
+
+        while (check.equalsIgnoreCase("S")) {
+            System.out.println("Ingrese el nombre de la ciudad");
+            nombre = leer.next();
+            System.out.println("Ingrese el codigo postal");
+            cp = leer.nextInt();
+
+            nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1).toLowerCase();
+            codigos.put(cp, nombre);
+
+            System.out.println("desea ingresar otra ciudad? S/N");
+            check = leer.next();
+            if (!check.equalsIgnoreCase("S") && !check.equalsIgnoreCase("N")) {
+                System.out.println("Opción invalida, reingrese S/N");
+                check = leer.next();
+            }
+        }
         return codigos;
     }
 
@@ -67,24 +94,23 @@ public class CiudadServicio {
         String ciudad2 = leer.next();
         String ciudad3 = leer.next();
 
-        int clave = 0, clave2 = 0, clave3 = 0;
+        int clave1 = 0, clave2 = 0, clave3 = 0;
 
         for (Map.Entry<Integer, String> ciudades : codigos.entrySet()) {
-            if (ciudades.getValue().equals(ciudad1)) {
-                clave = ciudades.getKey();
-                break; // Si solo deseas encontrar la primera coincidencia, puedes salir del bucle aquí.
+            if (ciudades.getValue().equalsIgnoreCase(ciudad1)) {
+                clave1 = ciudades.getKey();
             }
-            if (ciudades.getValue().equals(ciudad2)) {
-                clave = ciudades.getKey();
-                break; // Si solo deseas encontrar la primera coincidencia, puedes salir del bucle aquí.
+            if (ciudades.getValue().equalsIgnoreCase(ciudad2)) {
+                clave2 = ciudades.getKey();
             }
-            if (ciudades.getValue().equals(ciudad3)) {
-                clave = ciudades.getKey();
-                break; // Si solo deseas encontrar la primera coincidencia, puedes salir del bucle aquí.
+            if (ciudades.getValue().equalsIgnoreCase(ciudad3)) {
+                clave3 = ciudades.getKey();
             }
         }
 
-        if
+        codigos.remove(clave1);
+        codigos.remove(clave2);
+        codigos.remove(clave3);
 
     }
 }

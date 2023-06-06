@@ -21,8 +21,9 @@ public class Main {
         CiudadServicio cs = new CiudadServicio();
 
 
-        HashMap<Integer, String> codigos = cs.cargarCodigosAutom();
+//        HashMap<Integer, String> codigos = cs.cargarCodigosAutom();
 
+        HashMap<Integer, String> codigos = cs.cargarCodigosManual();
         cs.mostrarDatos(codigos);
         cs.buscarCodigo(codigos);
         cs.agregarCiudad(codigos);
