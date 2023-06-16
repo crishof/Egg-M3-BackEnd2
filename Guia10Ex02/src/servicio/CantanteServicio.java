@@ -31,21 +31,14 @@ public class CantanteServicio {
         opcion = leer.nextInt();
 
             switch (opcion) {
-                case 1:
-                    agregarCantante(cantantes);
-                    break;
-                case 2:
-                    mostrarLista(cantantes);
-                    break;
-                case 3:
-                    eliminarCantante(cantantes);
-                    break;
-                case 4:
-                    System.out.println("Programa finalizado");
-                    break;
-                default:
+                case 1 -> agregarCantante(cantantes);
+                case 2 -> mostrarLista(cantantes);
+                case 3 -> eliminarCantante(cantantes);
+                case 4 -> System.out.println("Programa finalizado");
+                default -> {
                     System.out.println("Opcion Incorrecta, reingrese");
                     opcion = leer.nextInt();
+                }
             }
         }while (opcion !=4);
     }

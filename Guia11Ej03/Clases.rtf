@@ -1,0 +1,139 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww18180\viewh16500\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 package entidad;\
+\
+import java.util.ArrayList;\
+import java.util.Collections;\
+import java.util.Iterator;\
+import java.util.Scanner;\
+\
+public class Baraja \{\
+\
+    Scanner leer = new Scanner(System.in).useDelimiter("\\n");\
+\
+    private ArrayList<Carta> cartas;\
+    private ArrayList<Carta> sobrante = new ArrayList();\
+\
+    public void crearBaraja() \{\
+\
+        cartas = new ArrayList();\
+\
+        String[] palos = \{"Espadas", "Bastos", "Oros", "Copas"\};\
+\
+        for (int i = 0; i < palos.length; i++) \{\
+\
+            for (int j = 1; j <= 12; j++) \{\
+\
+                if (j == 8 || j == 9) \{\
+\
+                    continue;\
+\
+                \}\
+\
+                Carta cartaAux = new Carta(j, palos[i]);\
+\
+                cartas.add(cartaAux); // setea el mazo de cartas en el atributo \
+            \}\
+        \}      \
+    \}\
+\
+    \
+    \
+    public void barajar() \{\
+\
+        Collections.shuffle(cartas);\
+        \
+        System.out.println("* Cartas mezcladas *");\
+        \
+           \}\
+\
+  \
+    \
+    public void siguienteCarta() \{\
+\
+        \
+\
+        Iterator it = cartas.iterator();\
+\
+        \
+        if (it.hasNext()) \{\
+\
+            System.out.println("Se entreg\'f3 la siguiente carta: ");\
+            System.out.println(it.next());\
+           \
+\
+            sobrante.add(cartas.get(0));\
+            it.remove();\
+       \
+        \}  else   \{\
+            System.out.println("Ya no quedan m\'e1s cartas por entregar");\
+        \}    \
+    \}\
+\
+    \
+    \
+    public void cartasDisponibles() \{\
+\
+        System.out.println("Quedan " + cartas.size() + " cartas disponibles");\
+    \}\
+\
+  \
+    \
+    public void darCartas() \{\
+\
+        System.out.println("Cuantas cartas desea?");\
+        int elegidas = leer.nextInt();\
+\
+        if (elegidas > cartas.size()) \{\
+\
+            System.out.println("La cantidad disponible no es suficiente");\
+        \}\
+\
+        else  \{\
+\
+            for (int i = 0; i < elegidas; i++) \{\
+\
+                siguienteCarta();\
+\
+            \}\
+        \}\
+    \}\
+  \
+    \
+    \
+    public void cartasMonton() \{\
+\
+        System.out.println("Mazo entregado:");\
+        System.out.println(" ");\
+\
+        \
+        if (sobrante.size() > 0) \{\
+    \
+            for (Carta aux : sobrante) \{\
+\
+            System.out.println(aux);\
+            \}\
+            \
+        \} else \{ \
+            System.out.println("No se ha entregado ninguna carta");\
+        \}\
+    \}\
+\
+    \
+   \
+    public void mostrarBaraja() \{\
+\
+        for (Carta cartaAux : cartas) \{\
+\
+            System.out.println(cartaAux);\
+        \}\
+    \}\
+\}\
+\
+\
+}
