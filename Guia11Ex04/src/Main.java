@@ -18,6 +18,8 @@ public class Main {
         ArrayList<Voto> votos = ss.votacion(alumnos);
         ss.mostrarVotos(votos);
 
+        ss.crearFacilitadores(votos);
+
 
     }
 }

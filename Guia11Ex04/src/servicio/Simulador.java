@@ -70,9 +70,11 @@ public class Simulador {
     public void mostrarAlumnos(ArrayList<Alumno> alumnos) {
 
         System.out.println(" _ _ _ _ _ALUMNOS _ _ _ _ ");
+        System.out.println();
         for (Alumno aux : alumnos) {
             System.out.println(aux);
         }
+        System.out.println(" _ _ _ _ _ _ _ _ _ _ _ _ _ ");
     }
 
     public ArrayList<Voto> votacion(ArrayList<Alumno> alumnos) {
@@ -88,21 +90,24 @@ public class Simulador {
 
             for (int j = 0; j < 3; j++) {
 
-                boolean check = false;
-                do {
-                    int index = random.nextInt(0, alumnos.size());
-                    Alumno voto = alumnos.get(index);
+                    boolean check = false;
+                    while (votados.size() < 3) {
+                        do {
+                            int index = random.nextInt(0, alumnos.size());
+                            Alumno voto = alumnos.get(index);
 
-                    String dni1 = voto.getDni();
-                    String dni2 = alumnos.get(i).getDni();
+                            String dni1 = voto.getDni();
+                            String dni2 = alumnos.get(i).getDni();
 
-                    if (!dni1.equals(dni2)) {
-                        alumnos.get(index).setVotosRecibidos(alumnos.get(index).getVotosRecibidos() + 1);
-                        votados.add(voto);
+                            if (!dni1.equals(dni2)) {
+                                alumnos.get(index).setVotosRecibidos(alumnos.get(index).getVotosRecibidos() + 1);
+                                votados.add(voto);
 
-                        check = true;
+                                check = true;
+                            }
+
+                        } while (!check);
                     }
-                } while (!check);
             }
 
             alumnos.get(i).setVotosEntregados(votados);
@@ -116,19 +121,57 @@ public class Simulador {
     public void mostrarVotos(ArrayList<Voto> votos) {
 
         System.out.println("_ _ _ _ _ VOTOS _ _ _ _ _ ");
+        System.out.println();
 
         for (int i = 0; i < votos.size(); i++) {
 
-            System.out.println("Nombre: " + votos.get(i).getAlumno().getNombreCompleto());
+            System.out.print("Nombre: " + votos.get(i).getAlumno().getNombreCompleto());
+            System.out.println(" - votos recibidos: " + votos.get(i).getAlumno().getVotosRecibidos());
+            System.out.println("Sus votos: ");
 
-            for (Voto aux: votos
-                 ) {
-                System.out.println("Voto " + j + ": " + votos.get(i).getVotados(j));
+            int j = 1;
+            for (Alumno aux : votos.get(i).getAlumno().getVotosEntregados()) {
+                System.out.println("Voto " + (j) + ": " + aux);
+                j++;
             }
-            }
+            System.out.println(" - - - - - - - - - - - ");
+            System.out.println();
         }
 
-
+        votos.get(0).getAlumno().getVotos();
     }
 
+    public void crearFacilitadores(ArrayList<Voto> votos){
+
+
+        TreeMap<String,Integer> facilitadores = new TreeMap<>();
+
+        for (Voto aux : votos ){
+            facilitadores.put(aux.getAlumno().getNombreCompleto(),aux.getAlumno().getVotosRecibidos());
+        }
+
+        // Crear una lista de Map.Entry y ordenarla por valor
+        ArrayList<Map.Entry<String, Integer>> list = new ArrayList<>(facilitadores.entrySet());
+        Collections.sort(list, Map.Entry.comparingByValue());
+
+        for ( Map.Entry<String, Integer> aux : list ){
+            System.out.println("Nombre: " + aux.getKey() + " - votos: " + aux.getValue());
+        }
+
+        System.out.println( "_ _ _ _ _ _ _ _ ");
+        System.out.println("Candidatos");
+        System.out.println(" _ _ _ _ _ _ _ _ ");
+
+        for (int i = 0; i < 5; i ++){
+            System.out.println("Facilitador: " + list.get((list.size()-1)-i));
+        }
+        System.out.println(" _ _ _ _ _ _ _ _ _ _ _ _ _ ");
+        System.out.println();
+        for (int i = 5; i < 10; i ++){
+            System.out.println("Suplente: " + list.get((list.size()-1)-i));
+        }
+    }
 }
+
+
+

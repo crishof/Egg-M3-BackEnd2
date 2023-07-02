@@ -8,14 +8,15 @@ public class Alumno {
     private String nombreCompleto;
     private String dni;
     private int votosRecibidos;
-
+    private HashSet<Alumno> votosEntregados;
     ArrayList<Voto> votos;
+
     public Alumno(String nombre, String documento) {
         this.nombreCompleto = nombre;
         this.dni = documento;
     }
 
-    public Alumno(String nombreCompleto, String dni, int votosRecibidos, HashSet<Alumno> votosEntregados) {
+    public Alumno(String nombreCompleto, String dni, int votosRecibidos) {
         this.nombreCompleto = nombreCompleto;
         this.dni = dni;
         this.votosRecibidos = votosRecibidos;
@@ -54,11 +55,18 @@ public class Alumno {
         this.votosEntregados = votosEntregados;
     }
 
+    public ArrayList<Voto> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(ArrayList<Voto> votos) {
+        this.votos = votos;
+    }
+
     @Override
     public String toString() {
         return "Nombre: " + nombreCompleto + '\'' + ", dni: " + dni + '\''
 //                + ", votosRecibidos=" + votosRecibidos +
-//                ", votosEntregados=" + votosEntregados +
                 + '}';
     }
 }

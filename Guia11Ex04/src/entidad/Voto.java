@@ -1,5 +1,6 @@
 package entidad;
 
+import java.util.Comparator;
 import java.util.HashSet;
 
 public class Voto {
@@ -31,7 +32,6 @@ public class Voto {
         this.votados = votados;
     }
 
-    @Override
     public String toString() {
         return "Voto{" +
                 "alumno=" + alumno +
