@@ -63,12 +63,12 @@ public class Amarre {
 
     @Override
     public String toString() {
-        return "Amarre{" +
-                "cliente=" + cliente +
-                ", fechaAlquiler=" + fechaAlquiler +
-                ", fechaDevolucion=" + fechaDevolucion +
-                ", posicion=" + posicion +
-                ", barco=" + barco +
-                '}';
+        return "Ficha alquiler: " +
+                "cliente: "
+                + cliente +
+                "\n fechaAlquiler: " + fechaAlquiler +
+                "\n fechaDevolucion: " + fechaDevolucion +
+                "\n posicion: " + posicion +
+                "\n barco: " + barco;
     }
 }

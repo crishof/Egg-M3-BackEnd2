@@ -25,4 +25,11 @@ public class Cliente {
     public void setDni(long dni) {
         this.dni = dni;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente: " +
+                "\n nombre: " + nombre +
+                "\n dni: " + dni;
+    }
 }

@@ -34,6 +34,9 @@ public class Main {
 
         Amarre amarre = as.Alquilar();
 
-    }
+        System.out.println("FICHA DE ALQUILER CREADA");
+        System.out.println("_ _ _ _ _ _ _ _ _ _ _ __ ");
+        System.out.println(amarre);
 
+    }
 }
