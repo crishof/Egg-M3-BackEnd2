@@ -21,13 +21,16 @@ public class Main {
 
         ps.mostrarDatos(mayor, masa);
 
-        persona[0] = null;
+        persona[3] = null;
         try {
-            ps.esMayorDeEdad(persona[0]);
-        }catch (NullPointerException e){
-            System.out.println("getMessage: " + e.getMessage());
+            ps.esMayorDeEdad(persona[3]);
+        }catch (NullPointerException aux){
+            System.out.println("getMessage: " + aux.getMessage());
+            System.out.println("getMessage: " + aux.getCause());
+
         }finally {
             System.out.println("Text desde finally");
+
         }
 
 
