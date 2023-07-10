@@ -1,7 +1,8 @@
 package entidades;
 
 public class Persona {
-//    Por cada persona, se debe conocer, al menos, su nombre y apellidos, su número de
+    private static int contador = 1;
+    //    Por cada persona, se debe conocer, al menos, su nombre y apellidos, su número de
 //    identificación y su estado civil.
     int id;
     String name;
@@ -11,8 +12,8 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(int id, String name, String apellido, String estadoCivil) {
-        this.id = id;
+    public Persona(String name, String apellido, String estadoCivil) {
+        id = contador++;
         this.name = name;
         this.apellido = apellido;
         this.estadoCivil = estadoCivil;
@@ -56,7 +57,8 @@ public class Persona {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", estadoCivil='" + estadoCivil + '\'' +
+                ", estado Civil='" + estadoCivil + '\'' +
                 '}';
     }
 }
+

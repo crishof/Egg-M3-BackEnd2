@@ -1,14 +1,14 @@
 package entidades;
 
-public class Profesor extends Empleado{
+public class Profesor extends Empleado {
 
 //    • Por lo que se refiere a los profesores, es necesario gestionar a qué departamento
 //    pertenecen (lenguajes, matemáticas, arquitectura, ...).
 
     private String departamento;
 
-    public Profesor(int id, String name, String apellido, String estadoCivil, int incorporacion, int despacho, String departamento) {
-        super(id, name, apellido, estadoCivil, incorporacion, despacho);
+    public Profesor(String name, String apellido, String estadoCivil, int incorporacion, int despacho, String departamento) {
+        super(name, apellido, estadoCivil, incorporacion, despacho);
         this.departamento = departamento;
     }
 
@@ -22,12 +22,12 @@ public class Profesor extends Empleado{
 
     @Override
     public String toString() {
-        return "Profesor{" +
-                "departamento='" + departamento + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", estadoCivil='" + estadoCivil + '\'' +
-                "} " + super.toString();
+        return "Profesor: " +
+                "id: " + id + '\n' +
+                "departamento: " + departamento + '\n' +
+                "name: " + name + '\n' +
+                "apellido: " + apellido + '\n' +
+                "estadoCivil: " + estadoCivil + '\n'
+                + super.toString();
     }
 }

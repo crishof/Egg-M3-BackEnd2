@@ -1,14 +1,14 @@
 package entidades;
 
-public class PersonalServicio extends Empleado{
+public class PersonalServicio extends Empleado {
 
 //    • Sobre el personal de servicio, hay que conocer a qué sección están asignados
 //            (biblioteca, decanato, secretaría, ...).
 
     private String seccion;
 
-    public PersonalServicio(int id, String name, String apellido, String estadoCivil, int incorporacion, int despacho, String seccion) {
-        super(id, name, apellido, estadoCivil, incorporacion, despacho);
+    public PersonalServicio(String name, String apellido, String estadoCivil, int incorporacion, int despacho, String seccion) {
+        super(name, apellido, estadoCivil, incorporacion, despacho);
         this.seccion = seccion;
     }
 
@@ -22,12 +22,12 @@ public class PersonalServicio extends Empleado{
 
     @Override
     public String toString() {
-        return "PersonalServicio{" +
-                "seccion='" + seccion + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", estadoCivil='" + estadoCivil + '\'' +
-                "} " + super.toString();
+        return "Personal de Servicio: " +
+                "id:" + id + "\n" +
+                "seccion: " + seccion + "\n" +
+                "name='" + name + "\n" +
+                "apellido='" + apellido + "\n" +
+                "estado Civil='" + estadoCivil + "\n" +
+                super.toString();
     }
 }
