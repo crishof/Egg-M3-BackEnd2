@@ -1,12 +1,8 @@
 package entidades;
 
-public class Guante implements Consumo{
+public class Guante {
 
     private String repulsorR;
     private String repulsorL;
 
-    @Override
-    public int calcularConsumo() {
-        return 0;
-    }
 }
