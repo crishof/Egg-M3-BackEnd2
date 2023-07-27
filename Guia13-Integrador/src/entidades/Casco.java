@@ -1,12 +1,19 @@
 package entidades;
 
 public class Casco {
+    Sintetizador sintetizador;
+    Consola consola;
 
-    private Consola consola;
-    private Sintetizador sintetizador;
+    public Casco(){
+        sintetizador = new Sintetizador();
+        consola = new Consola();
+    }
 
-    public Casco(Consola consola, Sintetizador sintetizador) {
-        this.consola = consola;
+    public Sintetizador getSintetizador() {
+        return sintetizador;
+    }
+
+    public void setSintetizador(Sintetizador sintetizador) {
         this.sintetizador = sintetizador;
     }
 
@@ -18,11 +25,19 @@ public class Casco {
         this.consola = consola;
     }
 
-    public Sintetizador getSintetizador() {
-        return sintetizador;
+    @Override
+    public String toString() {
+        return "Casco{" +
+                "sintetizador=" + sintetizador +
+                ", consola=" + consola +
+                '}';
     }
 
-    public void setSintetizador(Sintetizador sintetizador) {
-        this.sintetizador = sintetizador;
+    public void usarConsola(Armadura armadura) {
+        armadura.setBateria((armadura.getBateria() - (armadura.getCasco().getConsola().getConsumo())));
+    }
+
+    public void usarSintetizador(Armadura armadura) {
+        armadura.setBateria((armadura.getBateria() - (armadura.getCasco().getSintetizador().getConsumo())));
     }
 }

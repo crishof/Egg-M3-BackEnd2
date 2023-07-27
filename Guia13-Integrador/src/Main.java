@@ -1,18 +1,13 @@
 import entidades.Armadura;
-import entidades.Bota;
-import entidades.Casco;
-import entidades.Guante;
-
-import java.util.Scanner;
+import servicios.Jarvis;
 
 public class Main {
-
-
     public static void main(String[] args) {
 
+        Jarvis js = new Jarvis();
+        Armadura armadura = js.iniciarArmadura();
 
-        Armadura armadura = new Armadura("Rojo","Amarillo","botaL","BotaR","GuanteL","GuanteR",new Casco("Consola","Sintetizador"),100,100,100);
-
+        js.iniciarSistema(armadura);
     }
 
 }
