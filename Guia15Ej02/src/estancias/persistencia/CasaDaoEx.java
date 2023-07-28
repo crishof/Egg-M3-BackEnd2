@@ -1,4 +1,10 @@
 package estancias.persistencia;
 
-public class CasaDaoEx {
+import estancias.entidades.Familia;
+
+import java.sql.SQLException;
+
+public class CasaDaoEx extends DAO {
+
+
 }
