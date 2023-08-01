@@ -13,7 +13,7 @@ public class JpaTest {
         EditorialService es = new EditorialService();
         LibroService ls = new LibroService();
         
-        as.crearAutor();
+        as.guardarAutor();
         
     }
     

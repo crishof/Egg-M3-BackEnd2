@@ -4,34 +4,29 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Autor {
-//    Si no genera el id se implementa serializable
-    
+public class Autor implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
     private String nombre;
-    private boolean alta;
+    private Boolean alta;
 
     public Autor() {
     }
 
-    public Autor(String nombre, boolean alta) {
-        this.nombre = nombre;
-        this.alta = alta;
-    }
-
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,13 +38,17 @@ public class Autor {
         this.nombre = nombre;
     }
 
-    public boolean isAlta() {
+    public Boolean getAlta() {
         return alta;
     }
 
-    public void setAlta(boolean alta) {
+    public void setAlta(Boolean alta) {
         this.alta = alta;
     }
-    
-     
+
+    @Override
+    public String toString() {
+        return "Autor{" + "id=" + id + ", nombre=" + nombre + ", alta=" + alta + '}';
+    }
+
 }

@@ -4,45 +4,39 @@
  */
 package entidades;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Libro {
-    
+public class Libro implements Serializable {
+
     @Id
-    private long ISBN;
-    String titulo;
-    Integer anio;
-    private Integer ejemplaresPresados;
+    private long isbn;
+    private String titulo;
+    private Integer anio;
+    private Integer ejemplares;
+    private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
     private Boolean alta;
     @ManyToOne
+    @JoinColumn(name = "autor_id")
     private Autor autor;
     @ManyToOne
+    @JoinColumn(name = "editorial_id")
     private Editorial editorial;
 
     public Libro() {
     }
 
-    public Libro(long ISBN, String titulo, Integer anio, Integer ejemplaresPresados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
-        this.ISBN = ISBN;
-        this.titulo = titulo;
-        this.anio = anio;
-        this.ejemplaresPresados = ejemplaresPresados;
-        this.ejemplaresRestantes = ejemplaresRestantes;
-        this.alta = alta;
-        this.autor = autor;
-        this.editorial = editorial;
+    public long getIsbn() {
+        return isbn;
     }
 
-    public long getISBN() {
-        return ISBN;
-    }
-
-    public void setISBN(long ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(long ISBN) {
+        this.isbn = ISBN;
     }
 
     public String getTitulo() {
@@ -61,12 +55,20 @@ public class Libro {
         this.anio = anio;
     }
 
-    public Integer getEjemplaresPresados() {
-        return ejemplaresPresados;
+    public Integer getEjemplares() {
+        return ejemplares;
     }
 
-    public void setEjemplaresPresados(Integer ejemplaresPresados) {
-        this.ejemplaresPresados = ejemplaresPresados;
+    public void setEjemplares(Integer ejemplares) {
+        this.ejemplares = ejemplares;
+    }
+
+    public Integer getEjemplaresPrestados() {
+        return ejemplaresPrestados;
+    }
+
+    public void setEjemplaresPrestados(Integer ejemplaresPrestados) {
+        this.ejemplaresPrestados = ejemplaresPrestados;
     }
 
     public Integer getEjemplaresRestantes() {
@@ -100,9 +102,10 @@ public class Libro {
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Libro{" + "isbn=" + isbn + ", titulo=" + titulo + ", anio=" + anio + ", ejemplares=" + ejemplares + ", ejemplaresPresados=" + ejemplaresPrestados + ", ejemplaresRestantes=" + ejemplaresRestantes + ", alta=" + alta + ", autor=" + autor + ", editorial=" + editorial + '}';
+    }
+
 }

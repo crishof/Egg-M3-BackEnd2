@@ -1,18 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public abstract class DAO<T> {
+public abstract class DAO {
 
-//    Puede ser private porque
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaTestPU");
-    EntityManager em = emf.createEntityManager();
+    protected EntityManagerFactory emf;
+    protected EntityManager em;
+
+    public DAO() {
+        emf = Persistence.createEntityManagerFactory("JpaTestPU");
+        em = emf.createEntityManager();
+    }
+//    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaTestPU");
+//    EntityManager em = emf.createEntityManager();
 
 //    Instancia resumida
 //    EntityManager em = 
@@ -20,6 +22,7 @@ public abstract class DAO<T> {
 //                        .createEntityManager();
     protected void conectarBase() {
         if (!em.isOpen()) {
+            emf = Persistence.createEntityManagerFactory("JpaTestPU");
             em = emf.createEntityManager();
         }
     }
@@ -30,7 +33,7 @@ public abstract class DAO<T> {
         }
     }
 
-    protected void persistirEntidad(T object) {
+    protected void persistirEntidad(Object object) {
 
         try {
             conectarBase();
@@ -47,7 +50,7 @@ public abstract class DAO<T> {
         }
     }
 
-    protected void actualizarEntidad(T object) {
+    protected void actualizarEntidad(Object object) {
         try {
             conectarBase();
             em.getTransaction().begin();
@@ -64,7 +67,7 @@ public abstract class DAO<T> {
 
     }
 
-    protected void borrarEntidad(T object) {
+    protected void borrarEntidad(Object object) {
         try {
             conectarBase();
             em.getTransaction().begin();

@@ -5,26 +5,35 @@
 package persistencia;
 
 import entidades.Editorial;
+import java.util.List;
 
 /**
  *
  * @author cristian
  */
-public class EditorialDAO extends DAO<Editorial> {
+public class EditorialDAO extends DAO {
 
-    @Override
-    public void persistirEntidad(Editorial object) {
-        super.persistirEntidad(object);
+    public void persistirEditorial(Editorial editorial) {
+        persistirEntidad(editorial);
     }
 
-    @Override
-    protected void actualizarEntidad(Editorial object) {
-        super.persistirEntidad(object);
+    public void actualizarEditorial(Editorial editorial) {
+        actualizarEntidad(editorial);
     }
 
-    @Override
-    protected void borrarEntidad(Editorial object) {
-        super.persistirEntidad(object);
+    protected void borrarEditorial(Editorial editorial) {
+        borrarEntidad(editorial);
+
+    }
+
+    public List consultarEditorial() {
+        String jpql = "Select e from Editorial e";
+        return em.createQuery(jpql).getResultList();
+    }
+
+    public List<Editorial> buscarEditorialPorNombre(String nombre) {
+        String jpql = "Select e from Editorial e where e.nombre = :nombre";
+        return em.createQuery(jpql, Editorial.class).setParameter("nombre", nombre).getResultList();
     }
 
 }

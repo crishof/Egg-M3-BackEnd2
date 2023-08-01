@@ -1,15 +1,14 @@
-
 package entidades;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 
-
 @Entity
-public class Editorial {
-    
+public class Editorial implements Serializable {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
@@ -17,11 +16,6 @@ public class Editorial {
     private Boolean alta;
 
     public Editorial() {
-    }
-
-    public Editorial(String nombre, Boolean alta) {
-        this.nombre = nombre;
-        this.alta = alta;
     }
 
     public Integer getId() {
@@ -47,8 +41,5 @@ public class Editorial {
     public void setAlta(Boolean alta) {
         this.alta = alta;
     }
-    
-    
-    
-    
+
 }
