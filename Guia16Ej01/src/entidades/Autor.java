@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Autor implements Serializable {
+public class Autor implements Serializable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

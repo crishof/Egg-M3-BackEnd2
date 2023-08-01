@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia;
 
 import entidades.Autor;
 import java.util.List;
 
-/**
- *
- * @author cristian
- */
 public class AutorDAO extends DAO {
 
     public void persistirAutor(Autor autor) {
@@ -21,18 +13,30 @@ public class AutorDAO extends DAO {
         actualizarEntidad(autor);
     }
 
-    public void borrarEntidad(Autor autor) {
+    public void borrarAutor(Autor autor) {
         borrarEntidad(autor);
     }
 
-    public List buscarAutor() {
+    public Object buscarAutor(String nombre) {
 
-        return em.createQuery("Select a from Autor a").getResultList();
+        conectarBase();
+        String jpql = "Select a from Autor a where a.nombre = :nombre";
+        Object autor = em.createQuery(jpql)
+                .setParameter("nombre", nombre).getSingleResult();
+        
+        desconectarBase();
+        return autor;
     }
 
     public List<Autor> buscarAutoresPorNombre(String nombre) {
+        conectarBase();
         String jpql = "Select a from Autor a where a.nombre = :nombre";
-        return em.createQuery(jpql, Autor.class).setParameter("nombre", nombre).getResultList();
+
+        List<Autor> autores = em.createQuery(jpql).setParameter("nombre", nombre).getResultList();
+
+        desconectarBase();
+
+        return autores;
     }
 
 }

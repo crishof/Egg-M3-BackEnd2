@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package servicios;
 
 import entidades.Editorial;
@@ -9,10 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 import persistencia.EditorialDAO;
 
-/**
- *
- * @author cristian
- */
 public class EditorialService {
 
     EditorialDAO dao = new EditorialDAO();
@@ -36,7 +29,7 @@ public class EditorialService {
         } while (bucle);
     }
 
-    public void darBajaEditorial() {
+    public void BajaEditorial() {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         System.out.println("Ingrese el nombre de la editorial");
         String nombre = leer.next();

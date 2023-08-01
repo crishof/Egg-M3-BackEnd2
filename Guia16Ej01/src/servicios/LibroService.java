@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package servicios;
 
 import entidades.Editorial;
@@ -10,13 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 import persistencia.LibroDAO;
 
-/**
- *
- * @author cristian
- */
 public class LibroService {
 
-    private LibroDAO dao = new LibroDAO();
+    private final LibroDAO dao = new LibroDAO();
 
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
 
@@ -89,36 +82,8 @@ public class LibroService {
             }
         } while (bucle);
     }
-
-    public void prestarLibro(Libro libro) {
-        if (libro.getEjemplaresPrestados() < libro.getEjemplaresRestantes()) {
-            libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() + 1);
-            libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() - 1);
-            dao.actualizarLibro(libro);
-        } else {
-            System.out.println("No hay más libros para prestar");
-        }
-    }
-
-    public void devolverLibro(Libro libro) {
-        if (libro.getEjemplaresPrestados() > 0) {
-            libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() - 1);
-            libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() + 1);
-            dao.actualizarLibro(libro);
-        } else {
-            System.out.println("No hay ningún libro que devolver");
-        }
-    }
-
-    public List<Libro> buscarLibroAutor(String autor) {
-        return dao.consultaGenerica("Libro", "autor", autor);
-    }
-
-    public List<Libro> buscarLibroEditorial(String editorial) {
-        return dao.consultaGenerica("Libro", "editorial", editorial);
-    }
-
-    public void darBajaLibro() {
+    
+    public void BajaLibro() {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         Libro libro = null;
         boolean bucle;
@@ -130,13 +95,9 @@ public class LibroService {
             int option = leer.nextInt();
             bucle = false;
             switch (option) {
-                case 1:
-                    libro = buscarLibroIsbn();
-                    break;
-                case 2:
-                    libro = buscarLibroTitulo();
-                    break;
-                case 3:
+                case 1 -> libro = buscarLibroIsbn();
+                case 2 -> libro = buscarLibroTitulo();
+                case 3 -> {
                     System.out.println("Ingrese el nombre del autor:");
                     String autor = leer.next();
                     List<Libro> librosAutor = buscarLibroAutor(autor);
@@ -151,8 +112,8 @@ public class LibroService {
                         int indiceAutor = leer.nextInt() - 1;
                         libro = librosAutor.get(indiceAutor);
                     }
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("Ingrese el nombre de la editorial:");
                     String editorial = leer.next();
                     List<Libro> librosEditorial = buscarLibroEditorial(editorial);
@@ -167,10 +128,11 @@ public class LibroService {
                         int indiceEditorial = leer.nextInt() - 1;
                         libro = librosEditorial.get(indiceEditorial);
                     }
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Opción no reconocida");
                     bucle = true;
+                }
             }
         } while (bucle);
 
@@ -204,6 +166,48 @@ public class LibroService {
             System.out.println("Libro no encontrado");
             leer.next();
         }
+    }
+
+    public void prestarLibro(Libro libro) {
+        if (libro.getEjemplaresPrestados() < libro.getEjemplaresRestantes()) {
+            libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() + 1);
+            libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() - 1);
+            dao.actualizarLibro(libro);
+        } else {
+            System.out.println("No hay más libros para prestar");
+        }
+    }
+
+    public void devolverLibro(Libro libro) {
+        if (libro.getEjemplaresPrestados() > 0) {
+            libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() - 1);
+            libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() + 1);
+            dao.actualizarLibro(libro);
+        } else {
+            System.out.println("No hay ningún libro que devolver");
+        }
+    }
+
+    public List<Libro> buscarLibroAutor(String autor) {
+        return dao.consultaGenerica("Libro", "autor", autor);
+    }
+    
+    public void buscarLibroAutor() {
+        System.out.println("Ingrese el nombre del autor");
+        String nombreAutor = leer.next();
+        List<Libro> librosCoincidentes = dao.consultaGenerica("Libro", "autor", nombreAutor);
+        if (librosCoincidentes.isEmpty()) {
+            System.out.println("No se encontraron libros de " + nombreAutor);
+        } else {
+            System.out.println("Libros de " + nombreAutor + ":");
+            for (Libro libro : librosCoincidentes) {
+                System.out.println(libro);
+            }
+        }
+    }
+
+    public List<Libro> buscarLibroEditorial(String editorial) {
+        return dao.consultaGenerica("Libro", "editorial", editorial);
     }
 
     public Libro buscarLibroIsbn() {
@@ -245,17 +249,5 @@ public class LibroService {
         return null;
     }
 
-    public void buscarLibroAutor() {
-        System.out.println("Ingrese el nombre del autor");
-        String nombreAutor = leer.next();
-        List<Libro> librosCoincidentes = dao.consultaGenerica("Libro", "autor", nombreAutor);
-        if (librosCoincidentes.isEmpty()) {
-            System.out.println("No se encontraron libros de " + nombreAutor);
-        } else {
-            System.out.println("Libros de " + nombreAutor + ":");
-            for (Libro libro : librosCoincidentes) {
-                System.out.println(libro);
-            }
-        }
-    }
+    
 }

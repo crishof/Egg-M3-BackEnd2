@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package servicios;
 
 import entidades.Autor;
@@ -27,8 +23,9 @@ public class AutorService {
 
 //                        Valida si hay otro autor con el mismo nombre
             List<Autor> autores = dao.buscarAutoresPorNombre(nombre);
-            if (autores.isEmpty()) {
+            if (!autores.isEmpty()) {
                 System.out.println("Ya existe un autor con el mismo nombre");
+                bucle = true;
                 continue;
             }
 
@@ -87,19 +84,24 @@ public class AutorService {
 
         System.out.println("Ingrese el nombre del autor");
         String nombre = leer.next();
-        List<Autor> autores = dao.buscarAutor();
-        for (Autor aux : autores) {
-            if (aux.getNombre().equalsIgnoreCase(nombre)) {
-                System.out.println("Autor encontrado");
-                System.out.println(aux);
-                return aux;
-            }
+        Autor autor = (Autor) dao.buscarAutor(nombre);
 
+        if (autor.getNombre().equalsIgnoreCase(nombre)) {
+            System.out.println("Autor encontrado");
+            System.out.println(autor);
+            return autor;
+        } else {
+
+            System.out.println("Autor no encontrado");
+            return null;
         }
-
-        System.out.println("Autor no encontrado");
-        return null;
-
+    }
+    
+    public void buscarA(){
+        
+        Object autor = dao.buscarAutor("pepe");
+        
+        System.out.println(autor.toString());
     }
 
 }

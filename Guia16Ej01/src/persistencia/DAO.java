@@ -12,14 +12,9 @@ public abstract class DAO {
     public DAO() {
         emf = Persistence.createEntityManagerFactory("JpaTestPU");
         em = emf.createEntityManager();
-    }
-//    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaTestPU");
-//    EntityManager em = emf.createEntityManager();
 
-//    Instancia resumida
-//    EntityManager em = 
-//            Persistence.createEntityManagerFactory("JpaTestPU")
-//                        .createEntityManager();
+    }
+
     protected void conectarBase() {
         if (!em.isOpen()) {
             emf = Persistence.createEntityManagerFactory("JpaTestPU");
@@ -41,9 +36,10 @@ public abstract class DAO {
             em.persist(object);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("No se pudo cargar");
+            System.out.println("No se pudo guardar el elemento");
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
+                System.out.println("Rollback ejecutado");
             }
         } finally {
             desconectarBase();
@@ -57,9 +53,10 @@ public abstract class DAO {
             em.merge(object);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("No se pudo actualizar");
+            System.out.println("No se pudo actualizar el elemento");
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
+                System.out.println("Rollback ejecutado");
             }
         } finally {
             desconectarBase();
@@ -77,6 +74,7 @@ public abstract class DAO {
             System.out.println("No se pudo borrar");
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
+                System.out.println("Rollback ejecutado");
             }
         } finally {
             desconectarBase();
