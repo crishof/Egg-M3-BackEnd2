@@ -1,13 +1,14 @@
 package Armadura;
 
 
+
 public class Armadura {
 
     private String nombre;
     private String ColorPrimario;
     private String ColorSecundario;
     private float durezaArmadura;
-    private int Restantebateria = 100;
+    private int Restantebateria=100;
     private Casco casco;
     private Botas botadere;
     private Botas botasIzq;
@@ -133,9 +134,12 @@ public class Armadura {
 
     private void nombre(float dur) {
         switch (((int) dur)) {
-            case 1 -> nombre = "Mark III ";
-            case 2 -> nombre = "Mark 42";
-            case 3 -> nombre = "Mark 50";
+            case 1 ->
+                nombre = "Mark III ";
+            case 2 ->
+                nombre = "Mark 42";
+            case 3 ->
+                nombre = "Mark 50";
 
         }
     }
@@ -144,34 +148,35 @@ public class Armadura {
     private void TipoDureza(float duro) {
 
         switch (((int) duro)) {
-            case 1 -> setDurezaArmadura(60);
-            case 2 -> setDurezaArmadura(80);
-            case 3 -> setDurezaArmadura(100);
+            case 1 ->
+                setDurezaArmadura(60);
+            case 2 ->
+                setDurezaArmadura(80);
+            case 3 ->
+                setDurezaArmadura(100);
         }
     }
-
-    //seteo de la bateriaRestante y recargar
+//seteo de la bateriaRestante y recargar
     private void Recuadrobateria() {
-        setRestantebateria((botadere.getEnergia() + botasIzq.getEnergia() + guantedere.getEnergia() + guanteIzq.getEnergia() + casco.getEnergia()) / 5);
+        setRestantebateria((int) ((botadere.getEnergia() + botasIzq.getEnergia() + guantedere.getEnergia() + guanteIzq.getEnergia() + casco.getEnergia()) / 5));
 
     }
-
-    public void RecargarTraje() {
-        botadere.setEnergia(100);
-        botadere.setDurabilidad(100);
-        botasIzq.setEnergia(100);
-        botasIzq.setDurabilidad(100);
-        guanteIzq.setEnergia(100);
-        guanteIzq.setDurabilidad(100);
-        guantedere.setEnergia(100);
-        guantedere.setDurabilidad(100);
-        casco.setEnergia(100);
-
-    }
-
+ public void RecargarTraje(){
+ botadere.setEnergia(100);
+ botadere.setDurabilidad(100);
+ botasIzq.setEnergia(100);
+ botasIzq.setDurabilidad(100);
+ guanteIzq.setEnergia(100);
+ guanteIzq.setDurabilidad(100);
+ guantedere.setEnergia(100);
+ guantedere.setDurabilidad(100);
+ casco.setEnergia(100);
+ 
+ }
+    
 // consumo por propulsar y atacar
-
-    // consumo por propulsar
+  
+// consumo por propulsar
     public double ConsumoPropulsar(int intensidad, int tiempo) {
         double gasto = 0;
         gasto += botadere.consumoPropulsarse(intensidad, tiempo);
@@ -208,8 +213,7 @@ public class Armadura {
         Recuadrobateria();
         return gasto;
     }
-
-    //consumo por leer
+//consumo por leer
     public double ConsumoLeer(int intensidad, int tiempo) {
         double gasto = 0;
         gasto += casco.getConsola().ConsumoLeer_escribir(intensidad, tiempo);
@@ -217,50 +221,47 @@ public class Armadura {
         Recuadrobateria();
         return gasto;
     }
-
     //movimientos de ataque...
-    //Rayos repulsores. (vuelva y dispara)
+   //Rayos repulsores. (vuelva y dispara)
     public double AtacarRayosRepulsores(int intensidad, int tiempo) {
         double gasto = 0;
         gasto += ConsumoVolar(intensidad, tiempo);
         gasto += guanteIzq.consumoDisparos(intensidad, tiempo);
         gasto += guantedere.consumoDisparos(intensidad, tiempo);
-
+                
         Recuadrobateria();
         return gasto;
     }
-
     //Misiles y proyectiles
-    public double AtacarMisilesProyectiles(int intensidad, int tiempo) {
+     public double AtacarMisilesProyectiles(int intensidad, int tiempo) {
         double gasto = 0;
         gasto += ConsumoCorrer(intensidad, tiempo);
         gasto += 2; //gasto por despliegue de misiles
         Recuadrobateria();
         return gasto;
-    }
-
-    // Laser y Cañones de energia
-    public double AtacarLaser_Canon(int intensidad, int tiempo) {
+     }
+     // Laser y Cañones de energia
+     public double AtacarLaser_Canon(int intensidad, int tiempo) {
         double gasto = 0;
-        gasto += guanteIzq.consumoDisparos(intensidad, tiempo) * 2;
-        gasto += guantedere.consumoDisparos(intensidad, tiempo) * 2;
-
+        gasto += guanteIzq.consumoDisparos(intensidad, tiempo)*2;
+        gasto += guantedere.consumoDisparos(intensidad, tiempo)*2;
+             
         Recuadrobateria();
         return gasto;
     }
+     
+    
+public void MostrarEstadoArmaduraTotal(){
+    toString();
+}
 
-
-    public void MostrarEstadoArmaduraTotal() {
-        toString();
-    }
-
-    public void MostrarEstadorBateria() {
-        System.out.println("Bateria " + Restantebateria + " StarkWats(" + (Restantebateria / 100) + "%).");
-    }
+public void MostrarEstadorBateria(){
+    System.out.println( "Bateria " + Restantebateria + " StarkWats(" + (Restantebateria / 100) + "%).");
+}
 
     @Override
     public String toString() {
-
+        
         System.out.println("Este es el " + nombre);
         System.out.println("Colores " + ColorPrimario + " y " + ColorSecundario);
         System.out.println("Defensa de " + durezaArmadura);
@@ -271,8 +272,7 @@ public class Armadura {
         System.out.println("Guante Derecho: " + guantedere);
         System.out.println("Guante Izquierdo: " + guanteIzq);
         System.out.println(casco);
-
-        return " ";
-    }
+      
+        return " ";}
 
 }

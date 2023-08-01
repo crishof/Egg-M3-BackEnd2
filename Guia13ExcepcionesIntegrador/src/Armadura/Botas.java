@@ -5,6 +5,7 @@ public class Botas extends Propulsores {
     private int durabilidad = 100;
     private int energia = 100;
 //constructor
+
     public void Botas() {
      }
 //get y set
