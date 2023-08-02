@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia;
 
 import entidades.Libro;
 import java.util.List;
 import javax.persistence.Query;
 
-/**
- *
- * @author cristian
- */
 public class LibroDAO extends DAO {
 
     public void persistirLibro(Libro libro) {
@@ -27,9 +19,11 @@ public class LibroDAO extends DAO {
     }
 
     public List consultaGenerica(String entidad, String atributo, String variable) {
-        String jpql = "Select e from Libro e where e." + atributo + " like :variable";
+        conectarBase();
+        String jpql = "SELECT e FROM " + entidad + " e WHERE e." + atributo + " LIKE :variable";
         Query query = em.createQuery(jpql);
         query.setParameter("variable", "%" + variable + "%");
+//        desconectarBase();
         return query.getResultList();
     }
 

@@ -12,45 +12,21 @@ public class EditorialService {
 
     public void guardarEditorial() {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        boolean bucle;
 
-        boolean loop;
         do {
-            loop = false;
+            bucle = false;
             Editorial editorial = new Editorial();
-            System.out.println("Ingrese nombre de la editorial");
+            System.out.println("Ingrese el nombre de la editorial");
             String nombre = leer.next();
             editorial.setNombre(nombre);
             editorial.setAlta(true);
-
-//                        Valida si hay otra editorial con el mismo nombre
-            List<Editorial> editoriales = dao.buscarEditorialPorNombre(nombre);
-            if (!editoriales.isEmpty()) {
-                System.out.println("Ya existe una editorial con el mismo nombre");
-                loop = true;
-                continue;
-            }
-            
-
             dao.persistirEditorial(editorial);
-            System.out.println("Editorial guardada exitosamente");
-
-            System.out.println("Desea ingresar otra Editorial? S/N");
+            System.out.println("Desea cargar ingresar otra editorial? S/N");
             if (leer.next().equalsIgnoreCase("S")) {
-                loop = true;
+                bucle = true;
             }
-        } while (loop);
-    }
-    
-    public Editorial guardarEditorial(String nombre) {
-        
-            Editorial editorial = new Editorial();
-            editorial.setNombre(nombre);
-            editorial.setAlta(true);
-
-            dao.persistirEditorial(editorial);
-            System.out.println("Editorial guardada exitosamente");
-            
-            return editorial;
+        } while (bucle);
     }
 
     public void BajaEditorial() {
