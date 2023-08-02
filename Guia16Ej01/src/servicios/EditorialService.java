@@ -1,4 +1,3 @@
-
 package servicios;
 
 import entidades.Editorial;
@@ -29,7 +28,6 @@ public class EditorialService {
                 loop = true;
                 continue;
             }
-            
 
             dao.persistirEditorial(editorial);
             System.out.println("Editorial guardada exitosamente");
@@ -40,17 +38,17 @@ public class EditorialService {
             }
         } while (loop);
     }
-    
-    public Editorial guardarEditorial(String nombre) {
-        
-            Editorial editorial = new Editorial();
-            editorial.setNombre(nombre);
-            editorial.setAlta(true);
 
-            dao.persistirEditorial(editorial);
-            System.out.println("Editorial guardada exitosamente");
-            
-            return editorial;
+    public Editorial guardarEditorial(String nombre) {
+
+        Editorial editorial = new Editorial();
+        editorial.setNombre(nombre);
+        editorial.setAlta(true);
+
+        dao.persistirEditorial(editorial);
+        System.out.println("Editorial guardada exitosamente");
+
+        return editorial;
     }
 
     public void BajaEditorial() {
