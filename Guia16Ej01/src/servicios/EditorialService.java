@@ -51,7 +51,7 @@ public class EditorialService {
         return editorial;
     }
 
-    public void BajaEditorial() {
+    public void bajaEditorial() {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         System.out.println("Ingrese el nombre de la editorial");
         String nombre = leer.next();
@@ -91,6 +91,66 @@ public class EditorialService {
             leer.next();
         }
 
+    }
+
+    public Editorial buscarEditorialNombre() {
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+
+        System.out.println("Ingrese el nombre de la editorial");
+        String nombre = leer.next();
+        List<Editorial> editoriales = dao.buscarEditorialPorNombre(nombre);
+
+        Editorial ret = null;
+        for (Editorial aux : editoriales) {
+            if (aux.getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println("Editorial encontrada");
+                System.out.println(aux.toString());
+                ret = aux;
+
+            } else {
+
+                System.out.println("Editorial no encontrada");
+                ret = null;
+            }
+        }
+        return ret;
+    }
+
+    public void modificarEditorial() {
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        Editorial editorial = null;
+
+        editorial = buscarEditorialNombre();
+
+        boolean noEncontrado = true;
+        if (editorial != null) {
+            boolean alta = true;
+            boolean bucle2;
+            do {
+                bucle2 = false;
+                System.out.println("1- Darla de baja");
+                System.out.println("2- Darla de alta");
+                int opcion = leer.nextInt();
+                switch (opcion) {
+                    case 1 ->
+                        alta = false;
+                    case 2 ->
+                        alta = true;
+                    default -> {
+                        System.out.println("Opción no reconocida");
+                        bucle2 = true;
+                    }
+                }
+            } while (bucle2);
+            editorial.setAlta(alta);
+            noEncontrado = false;
+            dao.actualizarEditorial(editorial);
+        }
+
+        if (noEncontrado) {
+            System.out.println("Editorial no encontrada");
+            leer.next();
+        }
     }
 
 }

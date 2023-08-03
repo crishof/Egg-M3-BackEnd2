@@ -20,35 +20,8 @@ public class JpaTest {
 
 //        menu.general();
 
-//Libro libro = ls.buscarLibroTitulo("hobbit");
-//        System.out.println("libro = " + libro.toString());
-        
-        
-//Alta de Libro
-//ls.guardarLibro();
+  
 
-//Alta de Autor
-//as.guardarAutor();
-
-//Alta de Editorial
-//es.guardarEditorial();
-
-//Baja de Libro
-//ls.BajaLibro();
-
-//Baja de Autor
-//as.bajaAutor();
-
-//Baja de Editorial
-es.BajaEditorial();
-//Editar Libro
-//Editar Autor
-//Editar Editorial
-//Busqueda de un Autor por nombre
-//Busqueda de un libro por ISBN
-//Busqueda de un libro por T\u00edtulo
-//Busqueda de un libro/s por nombre de Autor
-//Buasqueda de un libro/s por nombre de Editorial
 //Crear cliente nuevo
 //Registrar el prestamo de un libro
 //Devolver un libro

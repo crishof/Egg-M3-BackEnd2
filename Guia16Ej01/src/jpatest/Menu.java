@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package jpatest;
 
 import java.util.Scanner;
@@ -9,10 +5,6 @@ import servicios.AutorService;
 import servicios.EditorialService;
 import servicios.LibroService;
 
-/**
- *
- * @author cristian
- */
 public class Menu {
 
     AutorService as = new AutorService();
@@ -29,18 +21,15 @@ public class Menu {
                                
                                = = = = = MENU = = = = = 
                                                              
-                               1 - Alta - ok
+                               1 - Alta
                                2 - Baja
                                3 - Editar
-                               4 - Busqueda de un Autor por nombre
-                               a - B\u00fasqueda de un libro por ISBN
-                               b - B\u00fasqueda de un libro por T\u00edtulo
-                               c - B\u00fasqueda de un libro/s por nombre de Autor
-                               d - B\u00fasqueda de un libro/s por nombre de Editorial
-                               5 -  Creaci\u00f3n de un Cliente nuevo
-                               6 - Registrar el pr\u00e9stamo de un libro
-                               7 - Devoluci\u00f3n de un libro
-                               8 - B\u00fasqueda de todos los pr\u00e9stamos de un Cliente
+                               4 - Buscar Autor
+                               5 - Buscar Libro
+                               5 - Creacion de un Cliente nuevo
+                               6 - Registrar el prestamo de un libro
+                               7 - Devolucion de un libro
+                               8 - Busqueda de todos los prestamos de un Cliente
                                0 - SALIR
                                
                                = = = = = = = = = = = = = = =
@@ -53,8 +42,16 @@ public class Menu {
 
                 case 1:
                     alta();
-                case 2: baja();
-                case 4: as.buscarAutorNombre();
+                case 2:
+                    baja();
+                case 3:
+                    modificar();
+                case 4:
+                    as.buscarAutorNombre();
+                case 5:
+                    buscarLibro();
+                case 0:
+                    System.out.println("Programa finalizado");
 
             }
 
@@ -73,7 +70,7 @@ public class Menu {
                                1 - Alta de Libro
                                2 - Alta de Autor
                                3 - Alta de Editorial
-                               0 - Volver al men\u00fa anterior
+                               0 - Volver al menu anterior
                                """);
 
             opcion2 = leer.nextInt();
@@ -95,7 +92,7 @@ public class Menu {
 
         } while (opcion2 != 0);
     }
-    
+
     public void baja() {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         int opcion;
@@ -108,7 +105,7 @@ public class Menu {
                                1 - Baja de Libro
                                2 - Baja de Autor
                                3 - Baja de Editorial
-                               0 - Volver al men\u00fa anterior
+                               0 - Volver al menu anterior
                                """);
 
             opcion = leer.nextInt();
@@ -116,13 +113,13 @@ public class Menu {
             switch (opcion) {
 
                 case 1 ->
-                    ls.guardarLibro();
+                    ls.bajaLibro();
 
                 case 2 ->
-                    as.guardarAutor();
+                    as.bajaAutor();
 
                 case 3 ->
-                    es.guardarEditorial();
+                    es.bajaEditorial();
 
                 default ->
                     System.out.println("Opcion incorrecta, reingrese");
@@ -131,4 +128,77 @@ public class Menu {
         } while (opcion != 0);
     }
 
+    public void modificar() {
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        int opcion;
+
+        do {
+            System.out.println("""
+                               
+                               = = = Menu modificar Estado = = = 
+                               Ingrese la opcion deseada
+                               1 - Modificar Libro
+                               2 - Modificar Autor
+                               3 - Modificar Editorial
+                               0 - Volver al menu anterior
+                               """);
+
+            opcion = leer.nextInt();
+
+            switch (opcion) {
+
+                case 1 ->
+                    ls.modificarLibro();
+
+                case 2 ->
+                    as.modificarAutor();
+
+                case 3 ->
+                    es.modificarEditorial();
+
+                default ->
+                    System.out.println("Opcion incorrecta, reingrese");
+            }
+
+        } while (opcion != 0);
+    }
+
+    public void buscarLibro() {
+
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        int opcion;
+
+        do {
+            System.out.println("Ingrese la opcion deseada"
+                    + "1 - buscar por ISBN"
+                    + "2 - buscar por Titulo"
+                    + "3 - buscar por Autor"
+                    + "4 - buscar por Editorial"
+                    + "0 - volver");
+
+            opcion = leer.nextInt();
+
+            switch (opcion) {
+
+                case 1 -> {
+                    ls.buscarLibroIsbn();
+                }
+
+                case 2 -> {
+                    ls.buscarLibroTitulo();
+                }
+
+                case 3 -> {
+                    ls.buscarLibroAutor();
+                }
+
+                case 4 -> {
+                    ls.buscarLibroEditorial();
+                }
+                default -> {
+                    System.out.println("Opcion incorrecta");
+                }
+            }
+        } while (opcion != 0);
+    }
 }

@@ -23,7 +23,7 @@ public class AutorDAO extends DAO {
         String jpql = "Select a from Autor a where a.nombre = :nombre";
         Object autor = em.createQuery(jpql)
                 .setParameter("nombre", nombre).getSingleResult();
-        
+
         desconectarBase();
         return autor;
     }
@@ -38,5 +38,4 @@ public class AutorDAO extends DAO {
 
         return autores;
     }
-
 }

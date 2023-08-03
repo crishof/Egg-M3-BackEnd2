@@ -28,7 +28,6 @@ public class AutorService {
                 loop = true;
                 continue;
             }
-            
 
             dao.persistirAutor(autor);
             System.out.println("Autor guardado exitosamente");
@@ -39,17 +38,17 @@ public class AutorService {
             }
         } while (loop);
     }
-    
-        public Autor guardarAutor(String nombre) {
-        
-            Autor autor = new Autor();
-            autor.setNombre(nombre);
-            autor.setAlta(true);
 
-            dao.persistirAutor(autor);
-            System.out.println("Autor guardado exitosamente");
-            
-            return autor;
+    public Autor guardarAutor(String nombre) {
+
+        Autor autor = new Autor();
+        autor.setNombre(nombre);
+        autor.setAlta(true);
+
+        dao.persistirAutor(autor);
+        System.out.println("Autor guardado exitosamente");
+
+        return autor;
     }
 
     public void bajaAutor() {
@@ -100,27 +99,56 @@ public class AutorService {
         List<Autor> autores = dao.buscarAutoresPorNombre(nombre);
 
         Autor ret = null;
-        for(Autor aux : autores) {
-        if (aux.getNombre().equalsIgnoreCase(nombre)) {
-            System.out.println("Autor encontrado");
-            System.out.println(aux.toString());
-            ret =  aux;
-            
-        } else {
+        for (Autor aux : autores) {
+            if (aux.getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println("Autor encontrado");
+                System.out.println(aux.toString());
+                ret = aux;
 
-            System.out.println("Autor no encontrado");
-            ret = null;
-        }
+            } else {
+
+                System.out.println("Autor no encontrado");
+                ret = null;
+            }
         }
         return ret;
     }
-    
-    
-//    public void buscarAutor(){
-//        
-//        Object autor = dao.buscarAutor("pepe");
-//        
-//        System.out.println(autor.toString());
-//    }
+
+    public void modificarAutor() {
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        Autor autor = null;
+
+        autor = buscarAutorNombre();
+
+        boolean noEncontrado = true;
+        if (autor != null) {
+            boolean alta = true;
+            boolean bucle2;
+            do {
+                bucle2 = false;
+                System.out.println("1- Darlo de baja");
+                System.out.println("2- Darlo de alta");
+                int opcion = leer.nextInt();
+                switch (opcion) {
+                    case 1 ->
+                        alta = false;
+                    case 2 ->
+                        alta = true;
+                    default -> {
+                        System.out.println("Opción no reconocida");
+                        bucle2 = true;
+                    }
+                }
+            } while (bucle2);
+            autor.setAlta(alta);
+            noEncontrado = false;
+            dao.actualizarAutor(autor);
+        }
+
+        if (noEncontrado) {
+            System.out.println("Autor no encontrado");
+            leer.next();
+        }
+    }
 
 }
