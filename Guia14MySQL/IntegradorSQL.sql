@@ -1,8 +1,9 @@
 /*
 CANDADO A
 Posición: El candado A está ubicado en la posición calculada a partir del número obtenido en la/s siguiente/s consulta/s:
-Teniendo el máximo de asistencias por partido, muestre cuantas veces se logró dicho máximo.
-Este resultado nos dará la posición del candado (1, 2, 3 o 4)
+Teniendo el máximo de asistencias por partido, muestre cuantas veces se logró dicho máximo.*/
+select count(asistencias_por_partido), Asistencias_por_partido FROM nba.estadisticas group by Asistencias_por_partido order by Asistencias_por_partido desc limit 5;
+/*Este resultado nos dará la posición del candado (1, 2, 3 o 4)
 Clave: La clave del candado A estará con formada por la/s siguientes consulta/s a la base de datos:
 Muestre la suma total del peso de los jugadores, donde la conferencia sea Este y la posición sea centro o esté comprendida en otras posiciones.
 */

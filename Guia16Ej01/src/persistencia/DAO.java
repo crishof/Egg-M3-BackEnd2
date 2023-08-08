@@ -8,11 +8,10 @@ public abstract class DAO {
 
     protected EntityManagerFactory emf;
     protected EntityManager em;
-
+    
     public DAO() {
         emf = Persistence.createEntityManagerFactory("JpaTestPU");
         em = emf.createEntityManager();
-
     }
 
     protected void conectarBase() {

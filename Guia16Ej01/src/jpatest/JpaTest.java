@@ -1,11 +1,14 @@
 package jpatest;
 
 import entidades.Libro;
+import java.util.List;
 import java.util.Scanner;
 import persistencia.LibroDAO;
 import servicios.AutorService;
+import servicios.ClienteService;
 import servicios.EditorialService;
 import servicios.LibroService;
+import servicios.PrestamoService;
 
 public class JpaTest {
 
@@ -15,20 +18,17 @@ public class JpaTest {
         EditorialService es = new EditorialService();
         LibroService ls = new LibroService();
         LibroDAO ld = new LibroDAO();
+        ClienteService cs = new ClienteService();
+        PrestamoService ps = new PrestamoService();
 
         Menu menu = new Menu();
 
 //        menu.general();
+//        ps.prestarLibro();
+        ps.devolverLibro();
 
-  
-
-//Crear cliente nuevo
-//Registrar el prestamo de un libro
 //Devolver un libro
 //Busqueda de todos los prestamos de un Cliente
-
-
-
         /*
 Crear los métodos para dar de alta/bajo o editar dichas entidades.
         

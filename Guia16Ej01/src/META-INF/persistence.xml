@@ -3,8 +3,10 @@
   <persistence-unit name="JpaTestPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entidades.Autor</class>
+    <class>entidades.Cliente</class>
     <class>entidades.Editorial</class>
     <class>entidades.Libro</class>
+    <class>entidades.Prestamo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/libreria?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

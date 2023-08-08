@@ -7,7 +7,12 @@ import persistencia.AutorDAO;
 
 public class AutorService {
 
-    AutorDAO dao = new AutorDAO();
+    AutorDAO dao;
+
+    public AutorService() {
+
+        dao = new AutorDAO();
+    }
 
     public void guardarAutor() {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");

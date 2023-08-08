@@ -2,14 +2,27 @@ package jpatest;
 
 import java.util.Scanner;
 import servicios.AutorService;
+import servicios.ClienteService;
 import servicios.EditorialService;
 import servicios.LibroService;
+import servicios.PrestamoService;
 
 public class Menu {
 
-    AutorService as = new AutorService();
-    EditorialService es = new EditorialService();
-    LibroService ls = new LibroService();
+    AutorService as;
+    EditorialService es;
+    LibroService ls;
+    ClienteService cs;
+    PrestamoService ps;
+
+    public Menu() {
+
+        as = new AutorService();
+        es = new EditorialService();
+        ls = new LibroService();
+        cs = new ClienteService();
+        ps = new PrestamoService();
+    }
 
     public void general() {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
@@ -26,10 +39,10 @@ public class Menu {
                                3 - Editar
                                4 - Buscar Autor
                                5 - Buscar Libro
-                               5 - Creacion de un Cliente nuevo
-                               6 - Registrar el prestamo de un libro
-                               7 - Devolucion de un libro
-                               8 - Busqueda de todos los prestamos de un Cliente
+                               6 - Creacion de un Cliente nuevo
+                               7 - Registrar el prestamo de un libro
+                               8 - Devolucion de un libro
+                               9 - Busqueda de todos los prestamos de un Cliente
                                0 - SALIR
                                
                                = = = = = = = = = = = = = = =
@@ -42,14 +55,24 @@ public class Menu {
 
                 case 1:
                     alta();
+                    break;
                 case 2:
                     baja();
+                    break;
                 case 3:
                     modificar();
+                    break;
                 case 4:
                     as.buscarAutorNombre();
+                    break;
                 case 5:
                     buscarLibro();
+                    break;
+                case 6:
+                    cs.guardarCliente();
+                    break;
+                case 7:
+                    ps.prestarLibro();
                 case 0:
                     System.out.println("Programa finalizado");
 
@@ -169,12 +192,14 @@ public class Menu {
         int opcion;
 
         do {
-            System.out.println("Ingrese la opcion deseada"
-                    + "1 - buscar por ISBN"
-                    + "2 - buscar por Titulo"
-                    + "3 - buscar por Autor"
-                    + "4 - buscar por Editorial"
-                    + "0 - volver");
+            System.out.println("""
+                                Ingrese la opcion deseada"
+                                1 - buscar por ISBN"
+                                2 - buscar por Titulo"
+                                3 - buscar por Autor"
+                                4 - buscar por Editorial"
+                                0 - volver
+                               """);
 
             opcion = leer.nextInt();
 

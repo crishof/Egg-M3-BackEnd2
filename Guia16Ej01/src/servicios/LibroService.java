@@ -10,10 +10,18 @@ import persistencia.LibroDAO;
 
 public class LibroService {
 
-    private final LibroDAO dao = new LibroDAO();
+    private final LibroDAO dao;
 
-    AutorService as = new AutorService();
-    EditorialService es = new EditorialService();
+    AutorService as;
+    EditorialService es;
+
+    public LibroService() {
+
+        dao = new LibroDAO();
+        as = new AutorService();
+        es = new EditorialService();
+
+    }
 
     public void guardarLibro() {
 
@@ -216,7 +224,6 @@ public class LibroService {
 
         if (noEncontrado) {
             System.out.println("Libro no encontrado");
-            leer.next();
         }
     }
 
@@ -307,13 +314,11 @@ public class LibroService {
     }
 
     public void prestarLibro(Libro libro) {
-        if (libro.getEjemplaresPrestados() < libro.getEjemplaresRestantes()) {
-            libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() + 1);
-            libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() - 1);
-            dao.actualizarLibro(libro);
-        } else {
-            System.out.println("No hay más libros para prestar");
-        }
+
+        libro.setEjemplaresPrestados(libro.getEjemplaresPrestados() + 1);
+        libro.setEjemplaresRestantes(libro.getEjemplaresRestantes() - 1);
+        dao.actualizarLibro(libro);
+
     }
 
     public void devolverLibro(Libro libro) {
@@ -334,7 +339,7 @@ public class LibroService {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         System.out.println("Ingrese el nombre del autor");
         String nombreAutor = leer.next();
-        List<Libro> librosCoincidentes = dao.consultaGenerica("Libro", "Autor", nombreAutor);
+        List<Libro> librosCoincidentes = dao.consultaGenerica("Libro", "autor.nombre", nombreAutor);
         if (librosCoincidentes.isEmpty()) {
             System.out.println("No se encontraron libros de " + nombreAutor);
         } else {
@@ -353,7 +358,7 @@ public class LibroService {
         Scanner leer = new Scanner(System.in).useDelimiter("\n");
         System.out.println("Ingrese el nombre de la editorial");
         String nombreEditorial = leer.next();
-        List<Libro> librosCoincidentes = dao.consultaGenerica("Libro", "Editorial", nombreEditorial);
+        List<Libro> librosCoincidentes = dao.consultaGenerica("Libro", "editorial.nombre", nombreEditorial);
         if (librosCoincidentes.isEmpty()) {
             System.out.println("No se encontraron libros de " + nombreEditorial);
         } else {
